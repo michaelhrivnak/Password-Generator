@@ -1,0 +1,6 @@
+function generate(){
+
+}
+function copyClip(){
+    
+}

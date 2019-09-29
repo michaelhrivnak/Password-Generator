@@ -2,23 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="Assets/style.css">
     <title>Password Generator</title>
   </head>
   <body>
-    <header>
-      <h1>Password Generator</h1>
-    </header>
-    <h2>Generate a Password</h2>
-    <textarea
-      readonly
-      id="password"
-      placeholder="Your Secure Password"
-    ></textarea>
-    <button id="generate">Generate Password</button>
-    <button id="copy">
-      Copy to Clipboard
-    </button>
+    <div class="container">
+      <header>
+        <h1>Password Generator</h1>
+      </header>
+      <div class="innerContainer">
+        <h2>Generate a Password</h2>
+        <hr>
+        <div><small>(select any number of the options below and then click 'Generate Password')</small></div>
+        <form class="checkBoxes">
+          <div>
+            <input id="chkLength" type="checkbox">
+            <label>Length <small>(8-128 Characters)</small></label>
+          </div>
+          <div>
+            <input id="chkSpecial" type="checkbox">
+            <label>Special Characetrs <small>(#, @, etc.)</small></label>
+          </div>
+          <div>
+            <input id="chkNumeric" type="checkbox">
+            <label>Number Characeters <small>(1, 2, etc.)</small></label>
+          </div>
+          <div>
+            <input id="chkLower" type="checkbox">
+            <label>Lowercase Characters</label>
+          </div>
+          <div>
+            <input id="chkUpper" type="checkbox">
+            <label>Uppercase Characters</label>
+          </div>
+        </form>
+        <textarea readonly id="password" placeholder="Your Secure Password"></textarea>
+        <hr>
+        <div class="btnGroup">
+          <button id="generate" onclick="generate()" class="btn bgRed">Generate Password</button>
+          <button id="copy" onclick="copyClip()" disabled class="btn disabled">Copy to Clipboard</button>
+        </div> 
+      </div>
+    </div>
+    <script type="text/javascript" src="Scripts/scripts.js"></script>    
   </body>
 </html>
