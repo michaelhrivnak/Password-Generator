@@ -14,6 +14,7 @@ function generate(){
     
     //create the password
     textArea.innerText = createPassword();
+    textArea.style.textAlign="left";
     
     //enable the copy button
     copyClipButton.removeAttribute("disabled");

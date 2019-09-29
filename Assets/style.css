@@ -79,7 +79,7 @@ form{
     margin-bottom:10px;
 }
 #lengthSliderInput{
-    flex-basis:90%;
+    flex-basis:80%;
 }
 #rangeValue{
     align-self: center;
