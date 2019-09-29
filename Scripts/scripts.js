@@ -5,7 +5,7 @@ var generateBtn = document.getElementById("generate");
 
 //set our allowed characters
 var specialChars = "~!@#$%^&*_-+={}[]:;<>,.?/";
-var lowerCaseChars = "abcdefghijklmnopqrstuvxyz";
+var lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
 var upperCaseChars = lowerCaseChars.toUpperCase();
 var numericChars = "0123456789";
 
