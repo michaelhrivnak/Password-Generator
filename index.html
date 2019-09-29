@@ -16,32 +16,37 @@
         <h2>Generate a Password</h2>
         <hr>
         <div><small>(select any number of the options below and then click 'Generate Password')</small></div>
-        <form class="checkBoxes">
+        <br>
+        <form class="lengthSlider">
+           
+            <label id="lengthLabel" for="charLength">Length <small>(8-128 Characters)</small></label><br>
+            <input id="lengthSliderInput" name="charLength" onchange="updateRangeValue(this)" type="range" value="8" step="1" min="8" max="128">
+            <label id="rangeValue" for="charLength">8</label>
+          
+        </form>
+        <small id="validateAlert">Please select at least one of the below options</small>
+        <form class="checkBoxes">          
           <div>
-            <input id="chkLength" type="checkbox">
-            <label>Length <small>(8-128 Characters)</small></label>
-          </div>
-          <div>
-            <input id="chkSpecial" type="checkbox">
+            <input id="chkSpecial" class="checkbox" onchange="validate()" type="checkbox">
             <label>Special Characetrs <small>(#, @, etc.)</small></label>
           </div>
           <div>
-            <input id="chkNumeric" type="checkbox">
-            <label>Number Characeters <small>(1, 2, etc.)</small></label>
+            <input id="chkNumeric" class="checkbox" onchange="validate()" type="checkbox">
+            <label>Numeric Characeters <small>(1, 2, etc.)</small></label>
           </div>
           <div>
-            <input id="chkLower" type="checkbox">
+            <input id="chkLower" class="checkbox" onchange="validate()" type="checkbox">
             <label>Lowercase Characters</label>
           </div>
           <div>
-            <input id="chkUpper" type="checkbox">
+            <input id="chkUpper" class="checkbox" onchange="validate()" type="checkbox">
             <label>Uppercase Characters</label>
           </div>
         </form>
         <textarea readonly id="password" placeholder="Your Secure Password"></textarea>
         <hr>
         <div class="btnGroup">
-          <button id="generate" onclick="generate()" class="btn bgRed">Generate Password</button>
+          <button id="generate" onclick="generate()" disabled class="btn bgRed disabled">Generate Password</button>
           <button id="copy" onclick="copyClip()" disabled class="btn disabled">Copy to Clipboard</button>
         </div> 
       </div>

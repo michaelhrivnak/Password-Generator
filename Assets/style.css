@@ -52,14 +52,15 @@ body{
     background-color: rgb(180, 69, 69);
     border-color:  rgb(124, 47, 47);
 }
-#copy{
+
+.disabled{
+    border-color: rgba(102,102,102,0.6);
     cursor: not-allowed;
     background-color: #eee;
     opacity: 0.6;
-    border-color: rgba(102,102,102,0.6);
 }
 form{
-    margin-bottom:15px;
+    margin-bottom:5px;
 }
 #password{
     padding:15px;
@@ -70,11 +71,36 @@ form{
     border-radius: 10px;
     text-align:center;
 }
+#password:focus{
+    outline:none;
+}
+#lengthLabel{
+    flex-basis:100%;
+    margin-bottom:10px;
+}
+#lengthSliderInput{
+    flex-basis:90%;
+}
+#rangeValue{
+    align-self: center;
+    margin-left: 10px;
+}
+#validateAlert{
+    color: red;    
+    margin-left:5px;
+}
+
+.lengthSlider{
+    display: flex;
+    width: calc(100% - 32px);
+    flex-wrap:wrap;
+    align-content:center;
+}
 small{
     color: #999;
 }
 .checkBoxes{
-    margin-top:10px;
+    margin-top:5px;
 }
 @media  only screen and (max-width:460px){
     .btnGroup{
@@ -89,3 +115,117 @@ small{
        
     }
 }
+
+/*START OF SLIDER STYLE*/
+#lengthSliderInput {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+    align-self: center;
+    
+}
+  
+  #lengthSliderInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  
+  #lengthSliderInput:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+  
+  #lengthSliderInput::-ms-track {
+    width: 100%;
+    cursor: pointer;
+  
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+  }
+/* Special styling for WebKit/Blink */
+#lengthSliderInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid #000000;
+    height: 20px;
+    width: 10px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  }
+  
+  /* All the same stuff for Firefox */
+  #lengthSliderInput::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 20px;
+    width: 10px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  
+  /* All the same stuff for IE */
+  #lengthSliderInput::-ms-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 20px;
+    width: 10px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  } 
+
+  #lengthSliderInput::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #395d7c;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+  }
+  
+  #lengthSliderInput:focus::-webkit-slider-runnable-track {
+    background: #395d7c;
+  }
+  
+  #lengthSliderInput::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #395d7c;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+  }
+  
+  #lengthSliderInput::-ms-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 4px 0;
+    color: transparent;
+  }
+  #lengthSliderInput::-ms-fill-lower {
+    background: #395d7c;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  #lengthSliderInput:focus::-ms-fill-lower {
+    background: #395d7c;
+  }
+  #lengthSliderInput::-ms-fill-upper {
+    background: #395d7c;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  #lengthSliderInput:focus::-ms-fill-upper {
+    background: #395d7c;
+  }
+  /*END OF SLIDER STYLE*/
