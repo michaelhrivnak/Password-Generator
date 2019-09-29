@@ -70,6 +70,8 @@ form{
     border: 2px dashed #444;
     border-radius: 10px;
     text-align:center;
+    white-space: normal;
+    word-break: break-all;
 }
 #password:focus{
     outline:none;
