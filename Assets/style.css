@@ -114,6 +114,9 @@ small{
         margin-bottom:10px;
        
     }
+    .container{
+        margin-top:0;
+    }
 }
 
 /*START OF SLIDER STYLE*/
