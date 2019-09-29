@@ -3,6 +3,12 @@ var textArea = document.getElementById("password");
 var copyClipButton = document.getElementById("copy");
 var generateBtn = document.getElementById("generate");
 
+//set our allowed characters
+var specialChars = "~!@#$%^&*_-+={}[]:;<>,.?/";
+var lowerCaseChars = "abcdefghijklmnopqrstuvxyz";
+var upperCaseChars = lowerCaseChars.toUpperCase();
+var numericChars = "0123456789";
+
 //on button click
 function generate(){
     
@@ -27,17 +33,63 @@ function copyClip(){
 }
 //generate the password based on criteria
 function createPassword(){
-    var mPassword = "";
+    var mPassword = [];
+    var totalCharSet = "";
+    var passwordResult = "";
 
-    var isLengthChk = document.getElementById("chkLength").checked;
+    var inputLength = parseInt(document.getElementById("lengthSliderInput").value);
     var isSpecialChk = document.getElementById("chkSpecial").checked;
     var isNumChk = document.getElementById("chkNumeric").checked;
     var isLowerChk = document.getElementById("chkLower").checked;
     var isUpperChk = document.getElementById("chkUpper").checked;
-
+    
     //TODO:PASSWORD CREATION ALGORITHM
 
-    return mPassword;
+    //ensure at least one character of each type of checked character is included.
+    if (isSpecialChk){
+        totalCharSet += specialChars;
+        var randomPos = getRandom(specialChars.length);
+        mPassword.push(specialChars.substr(randomPos,1));
+    }
+    if(isNumChk){
+        totalCharSet += numericChars;
+        var randomPos = getRandom(numericChars.length);
+        mPassword.push(numericChars.substr(randomPos,1));
+    }
+    if(isLowerChk){
+        totalCharSet += lowerCaseChars;
+        var randomPos = getRandom(lowerCaseChars.length);
+        mPassword.push(lowerCaseChars.substr(randomPos,1));
+    }
+    if(isUpperChk){
+        totalCharSet += upperCaseChars;
+        var randomPos = getRandom(upperCaseChars.length);
+        mPassword.push(upperCaseChars.substr(randomPos,1));
+    }
+
+    if(mPassword.length > 0){
+
+        for(var i = mPassword.length ; i < inputLength ; i++){
+            var randomPos = getRandom(totalCharSet.length);
+            mPassword.push(totalCharSet.substr(randomPos,1));
+        }
+        while(mPassword.length > 0){
+            passwordResult += mPassword.splice(getRandom(mPassword.length),1).toString();
+        }
+        
+    }else{
+        alert("oops, something went wrong, please try again.");
+    }
+
+    //Randomize the result
+   
+    return passwordResult;
+   
+
+}
+function getRandom(range){
+
+    return Math.floor(Math.random()*range);
 
 }
 
