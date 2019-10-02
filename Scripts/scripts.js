@@ -37,60 +37,63 @@ function createPassword(){
     var mPassword = [];
     var totalCharSet = "";
     var passwordResult = "";
-
+    var randomPos = 0;
     var inputLength = parseInt(document.getElementById("lengthSliderInput").value);
     var isSpecialChk = document.getElementById("chkSpecial").checked;
     var isNumChk = document.getElementById("chkNumeric").checked;
     var isLowerChk = document.getElementById("chkLower").checked;
     var isUpperChk = document.getElementById("chkUpper").checked;
     
-    //TODO:PASSWORD CREATION ALGORITHM
+   
 
     //ensure at least one character of each type of checked character is included.
     if (isSpecialChk){
         totalCharSet += specialChars;
-        var randomPos = getRandom(specialChars.length);
+        randomPos = getRandomZeroToMax(specialChars.length);
         mPassword.push(specialChars.substr(randomPos,1));
     }
     if(isNumChk){
         totalCharSet += numericChars;
-        var randomPos = getRandom(numericChars.length);
+        randomPos = getRandomZeroToMax(numericChars.length);
         mPassword.push(numericChars.substr(randomPos,1));
     }
     if(isLowerChk){
         totalCharSet += lowerCaseChars;
-        var randomPos = getRandom(lowerCaseChars.length);
+        randomPos = getRandomZeroToMax(lowerCaseChars.length);
         mPassword.push(lowerCaseChars.substr(randomPos,1));
     }
     if(isUpperChk){
         totalCharSet += upperCaseChars;
-        var randomPos = getRandom(upperCaseChars.length);
+        randomPos = getRandomZeroToMax(upperCaseChars.length);
         mPassword.push(upperCaseChars.substr(randomPos,1));
     }
 
     if(mPassword.length > 0){
-
+        //gemerate remainder of password
         for(var i = mPassword.length ; i < inputLength ; i++){
-            var randomPos = getRandom(totalCharSet.length);
+            randomPos = getRandomZeroToMax(totalCharSet.length);
             mPassword.push(totalCharSet.substr(randomPos,1));
         }
+        //Randomize the result
         while(mPassword.length > 0){
-            passwordResult += mPassword.splice(getRandom(mPassword.length),1).toString();
+            passwordResult += mPassword.splice(getRandomZeroToMax(mPassword.length),1).toString();
         }
         
     }else{
         alert("oops, something went wrong, please try again.");
     }
 
-    //Randomize the result
+    
    
     return passwordResult;
    
 
 }
-function getRandom(range){
 
-    return Math.floor(Math.random()*range);
+//small helper function to increase readability
+function getRandomZeroToMax(maxValue){
+
+    return Math.floor(Math.random()*maxValue);
 
 }
 
@@ -145,6 +148,60 @@ function clearSelection() {
 function updateRangeValue(elem){
 
     var rangeText = document.getElementById("rangeValue");
-    rangeText.innerText = elem.value.toString(); 
+    
+    
+    rangeText.value = elem.value.toString();
+    
+
+    //adjust the slider background based on value
+    updateSliderBackground(elem);
+}
+
+function updateSliderBackground(elem){
+    
+    var min = parseInt(elem.getAttribute("min"));
+    var max = parseInt(elem.getAttribute("max"));
+    var val = parseInt(elem.value);
+    
+
+    elem.style.backgroundImage = 'linear-gradient(to right, #395d7C ' 
+    + Math.round((val-min)/(max-min)*100) 
+    + '%, #d3d3d3 ' + Math.round((val-min)/(max-min)*100) + '% )'; 
+}
+
+//control our inputs
+function updateSliderValue(elem){
+    var rangeSlider = document.getElementById("lengthSliderInput");    
+    
+    if(validateSliderTextInput(parseInt(elem.value), rangeSlider, elem)){
+        rangeSlider.value = elem.value.toString();
+        updateSliderBackground(rangeSlider);
+    }
+    
+}
+
+//control our inputs
+function validateSliderTextInput(value, sliderElem, textElem){
+    
+    if(isNaN(value)){
+             
+        return false;
+
+    }else if(value < parseInt(sliderElem.getAttribute("min"))){
+        
+        sliderElem.value = sliderElem.getAttribute("min");
+        updateSliderBackground(sliderElem);
+        return false;
+  
+    }else if (value > parseInt(sliderElem.getAttribute("max"))){
+        
+        sliderElem.value = sliderElem.getAttribute("max");
+        updateSliderBackground(sliderElem);
+        return false;
+  
+    }else{
+        
+        return true;
+    }
     
 }

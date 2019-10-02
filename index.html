@@ -21,7 +21,7 @@
            
             <label id="lengthLabel" for="charLength">Length <small>(8-128 Characters)</small></label><br>
             <input id="lengthSliderInput" name="charLength" onchange="updateRangeValue(this)" type="range" value="8" step="1" min="8" max="128">
-            <label id="rangeValue" for="charLength">8</label>
+            <input id="rangeValue" type="text" value="8" oninput="updateSliderValue(this)">
           
         </form>
         <small id="validateAlert">Please select at least one of the below options</small>

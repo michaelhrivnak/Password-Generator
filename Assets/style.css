@@ -76,6 +76,12 @@ form{
 #password:focus{
     outline:none;
 }
+.lengthSlider{
+    display: flex;
+    width: calc(100% - 32px);
+    flex-wrap:wrap;
+    align-content:center;
+}
 #lengthLabel{
     flex-basis:100%;
     margin-bottom:10px;
@@ -91,12 +97,8 @@ form{
     color: red;    
     margin-left:5px;
 }
-
-.lengthSlider{
-    display: flex;
-    width: calc(100% - 32px);
-    flex-wrap:wrap;
-    align-content:center;
+#rangeValue{
+    width: 30px;
 }
 small{
     color: #999;
@@ -123,118 +125,43 @@ small{
         margin-top: 0.1em;
         margin-bottom: 0.1em;
     }
+    #lengthSliderInput{
+        flex-basis:70%;
+    }
 }
 
 /*START OF SLIDER STYLE*/
 #lengthSliderInput {
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 100%; /* Specific width is required for Firefox. */
-    background: transparent; /* Otherwise white in Chrome */
-    align-self: center;
-    
-}
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
   
+  /* Mouse-over effects */
+  #lengthSliderInput:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
   #lengthSliderInput::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: rgb(180, 69, 69); /* Green background */
+    cursor: pointer; /* Cursor on hover */
   }
   
-  #lengthSliderInput:focus {
-    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
-  }
-  
-  #lengthSliderInput::-ms-track {
-    width: 100%;
-    cursor: pointer;
-  
-    /* Hides the slider so custom styles can be added */
-    background: transparent; 
-    border-color: transparent;
-    color: transparent;
-  }
-/* Special styling for WebKit/Blink */
-#lengthSliderInput::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: 1px solid #000000;
-    height: 20px;
-    width: 10px;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-    margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
-  }
-  
-  /* All the same stuff for Firefox */
   #lengthSliderInput::-moz-range-thumb {
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    border: 1px solid #000000;
-    height: 20px;
-    width: 10px;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-  }
-  
-  /* All the same stuff for IE */
-  #lengthSliderInput::-ms-thumb {
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    border: 1px solid #000000;
-    height: 20px;
-    width: 10px;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-  } 
-
-  #lengthSliderInput::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4px;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    background: #395d7c;
-    border-radius: 1.3px;
-    border: 0.2px solid #010101;
-  }
-  
-  #lengthSliderInput:focus::-webkit-slider-runnable-track {
-    background: #395d7c;
-  }
-  
-  #lengthSliderInput::-moz-range-track {
-    width: 100%;
-    height: 4px;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    background: #395d7c;
-    border-radius: 1.3px;
-    border: 0.2px solid #010101;
-  }
-  
-  #lengthSliderInput::-ms-track {
-    width: 100%;
-    height: 4px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    border-width: 4px 0;
-    color: transparent;
-  }
-  #lengthSliderInput::-ms-fill-lower {
-    background: #395d7c;
-    border: 0.2px solid #010101;
-    border-radius: 2.6px;
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  }
-  #lengthSliderInput:focus::-ms-fill-lower {
-    background: #395d7c;
-  }
-  #lengthSliderInput::-ms-fill-upper {
-    background: #395d7c;
-    border: 0.2px solid #010101;
-    border-radius: 2.6px;
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  }
-  #lengthSliderInput:focus::-ms-fill-upper {
-    background: #395d7c;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: rgb(180, 69, 69); /* Green background */
+    cursor: pointer; /* Cursor on hover */
   }
   /*END OF SLIDER STYLE*/
