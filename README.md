@@ -4,6 +4,8 @@
 This is a small web app to create a strong randomly generated password based on user selections using a simple interface with the bulk of the logic
 being written in Javascript. HTML and CSS used to structure and style the page. Page built to be responsive without the use of external libraries.
 
+Deployment URL: https://michaelhrivnak.github.io/Password-Generator/
+
 ## Installation
 
 No installation required
