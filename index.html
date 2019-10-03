@@ -17,6 +17,7 @@
         <hr>
         <div><small>(select any number of the options below and then click 'Generate Password')</small></div>
         <br>
+        <!-- Lenght of password form -->
         <form class="lengthSlider">
            
             <label id="lengthLabel" for="lengthSliderInput">Length <small>(8-128 Characters)</small></label><br>
@@ -24,11 +25,14 @@
             <input id="rangeValue" type="text" value="16" oninput="updateSliderValue(this)">
           
         </form>
+        <!--alert text that appears when inputs are not selected-->
         <small id="validateAlert">Please select at least one of the below options</small>
+        <!--checkboxes form-->
         <form class="checkBoxes">          
           <div>
             <input id="chkSpecial" class="checkbox validCheckBox" onchange="validate();toggleAmbigCharChk();" type="checkbox">
-            <label>Special Characetrs <small>(#, @, etc.)</small></label>
+            <label>Special Characters <small>(#, @, etc.)</small></label>
+            <!--sub checkbox for excluding characters-->
             <div id="excludeAmbigChar" style="margin-left: 10px;" hidden>
                 <input id="chkExcludeAmbigChar" class="checkbox" onchange="" type="checkbox">
                 <label>Exclude Ambigous Characters <small>( [ ] { } ; :, etc.)</small></label>
@@ -47,8 +51,10 @@
             <label>Uppercase Characters</label>
           </div>
         </form>
+        <!--results area-->
         <textarea readonly id="password" placeholder="Your Secure Password"></textarea>
         <hr>
+        <!--buttons-->
         <div class="btnGroup">
           <button id="generate" onclick="generate()" disabled class="btn bgRed disabled">Generate Password</button>
           <button id="copy" onclick="copyClip()" disabled class="btn disabled">Copy to Clipboard</button>

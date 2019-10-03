@@ -10,6 +10,7 @@ var lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
 var upperCaseChars = lowerCaseChars.toUpperCase();
 var numericChars = "0123456789";
 
+//fill in the default amount of slider on page load
 onload = function(){
     updateSliderBackground(document.getElementById("lengthSliderInput"));
  };
@@ -37,16 +38,19 @@ function copyClip(){
     alert("Password Copied to Clipboard");
     clearSelection();
 }
+//toggles the hidden field for excluding ambiguous characters
 function toggleAmbigCharChk(){
     var chkExcludeAmbigChar = document.getElementById("excludeAmbigChar");
     chkExcludeAmbigChar.toggleAttribute("hidden");
 }
 //generate the password based on criteria
 function createPassword(){
+    //set up our variables
     var mPassword = [];
     var totalCharSet = "";
     var passwordResult = "";
     var randomPos = 0;
+    //grab our elements
     var inputLength = parseInt(document.getElementById("lengthSliderInput").value);
     var isSpecialChk = document.getElementById("chkSpecial").checked;
     var isExcludeAmbigChk = document.getElementById("chkExcludeAmbigChar").checked;
@@ -57,7 +61,7 @@ function createPassword(){
 
     //ensure at least one character of each type of checked character is included.
     if (isSpecialChk){
-
+        //change character set if ambiguous characters are to be excluded
         if(isExcludeAmbigChk){
             totalCharSet += specilCharsExcluded;
             randomPos = getRandomZeroToMax(specilCharsExcluded.length);    
@@ -69,16 +73,19 @@ function createPassword(){
         }
         
     }
+    //numeric characters
     if(isNumChk){
         totalCharSet += numericChars;
         randomPos = getRandomZeroToMax(numericChars.length);
         mPassword.push(numericChars.substr(randomPos,1));
     }
+    //lowercase characters
     if(isLowerChk){
         totalCharSet += lowerCaseChars;
         randomPos = getRandomZeroToMax(lowerCaseChars.length);
         mPassword.push(lowerCaseChars.substr(randomPos,1));
     }
+    //uppercase characters
     if(isUpperChk){
         totalCharSet += upperCaseChars;
         randomPos = getRandomZeroToMax(upperCaseChars.length);
@@ -97,14 +104,11 @@ function createPassword(){
         }
         
     }else{
+        //just in case this somehow gets here
         alert("oops, something went wrong, please try again.");
     }
-
-    
-   
+ 
     return passwordResult;
-   
-
 }
 
 //small helper function to increase readability
@@ -166,20 +170,17 @@ function updateRangeValue(elem){
 
     var rangeText = document.getElementById("rangeValue");
     
-    
     rangeText.value = elem.value.toString();
-    
-
     //adjust the slider background based on value
     updateSliderBackground(elem);
 }
 
+//updates the slider bar progress
 function updateSliderBackground(elem){
     
     var min = parseInt(elem.getAttribute("min"));
     var max = parseInt(elem.getAttribute("max"));
     var val = parseInt(elem.value);
-    
 
     elem.style.backgroundImage = 'linear-gradient(to right, #395d7C ' 
     + Math.round((val-min)/(max-min)*100) 
@@ -188,6 +189,7 @@ function updateSliderBackground(elem){
 
 //control our inputs
 function updateSliderValue(elem){
+
     var rangeSlider = document.getElementById("lengthSliderInput");    
     
     if(validateSliderTextInput(parseInt(elem.value), rangeSlider, elem)){
