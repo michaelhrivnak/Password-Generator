@@ -4,10 +4,15 @@ var copyClipButton = document.getElementById("copy");
 var generateBtn = document.getElementById("generate");
 
 //set our allowed characters
-var specialChars = "~!@#$%^&*_-+={}[]:;<>,.?/";
+var specialChars = "`~!@#$%^&*_-+={}[]():;<>,.?/'";
+var specilCharsExcluded = "!@#$%^&*_-+=?"; // excluded chacters: '{ } [ ] ( ) / \ ' " ` ~ , ; : . < >' 
 var lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
 var upperCaseChars = lowerCaseChars.toUpperCase();
 var numericChars = "0123456789";
+
+onload = function(){
+    updateSliderBackground(document.getElementById("lengthSliderInput"));
+ };
 
 //on button click
 function generate(){
@@ -32,6 +37,10 @@ function copyClip(){
     alert("Password Copied to Clipboard");
     clearSelection();
 }
+function toggleAmbigCharChk(){
+    var chkExcludeAmbigChar = document.getElementById("excludeAmbigChar");
+    chkExcludeAmbigChar.toggleAttribute("hidden");
+}
 //generate the password based on criteria
 function createPassword(){
     var mPassword = [];
@@ -40,17 +49,25 @@ function createPassword(){
     var randomPos = 0;
     var inputLength = parseInt(document.getElementById("lengthSliderInput").value);
     var isSpecialChk = document.getElementById("chkSpecial").checked;
+    var isExcludeAmbigChk = document.getElementById("chkExcludeAmbigChar").checked;
     var isNumChk = document.getElementById("chkNumeric").checked;
     var isLowerChk = document.getElementById("chkLower").checked;
     var isUpperChk = document.getElementById("chkUpper").checked;
     
-   
 
     //ensure at least one character of each type of checked character is included.
     if (isSpecialChk){
-        totalCharSet += specialChars;
-        randomPos = getRandomZeroToMax(specialChars.length);
-        mPassword.push(specialChars.substr(randomPos,1));
+
+        if(isExcludeAmbigChk){
+            totalCharSet += specilCharsExcluded;
+            randomPos = getRandomZeroToMax(specilCharsExcluded.length);    
+            mPassword.push(specilCharsExcluded.substr(randomPos,1));
+        }else{
+            totalCharSet += specialChars;
+            randomPos = getRandomZeroToMax(specialChars.length);
+            mPassword.push(specialChars.substr(randomPos,1));
+        }
+        
     }
     if(isNumChk){
         totalCharSet += numericChars;
@@ -100,7 +117,7 @@ function getRandomZeroToMax(maxValue){
 function validate(){
     var isValid = false;
     var validAlert = document.getElementById("validateAlert");
-    var inputs = document.querySelectorAll(".checkbox");
+    var inputs = document.querySelectorAll(".validCheckBox");
     
     //check if inputs are checked.
     for(var i = 0 ; i < inputs.length; i++){
