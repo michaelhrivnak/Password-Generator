@@ -21,8 +21,8 @@
         <form class="lengthSlider">
            
             <label id="lengthLabel" for="lengthSliderInput">Length <small>(8-128 Characters)</small></label><br>
-            <input id="lengthSliderInput" name="charLength" onchange="updateRangeValue(this)" type="range" value="16" step="1" min="8" max="128">
-            <input id="rangeValue" type="text" value="16" oninput="updateSliderValue(this)">
+            <input id="lengthSliderInput" name="charLength" type="range" step="1">
+            <input id="rangeValue" type="text">
           
         </form>
         <!--alert text that appears when inputs are not selected-->
@@ -30,24 +30,24 @@
         <!--checkboxes form-->
         <form class="checkBoxes">          
           <div>
-            <input id="chkSpecial" class="checkbox validCheckBox" onchange="validate();toggleAmbigCharChk();" type="checkbox">
+            <input id="chkSpecial" class="checkbox validCheckBox" type="checkbox">
             <label>Special Characters <small>(#, @, etc.)</small></label>
             <!--sub checkbox for excluding characters-->
             <div id="excludeAmbigChar" style="margin-left: 10px;" hidden>
-                <input id="chkExcludeAmbigChar" class="checkbox" onchange="" type="checkbox">
+                <input id="chkExcludeAmbigChar" class="checkbox" type="checkbox">
                 <label>Exclude Ambigous Characters <small>( [ ] { } ; :, etc.)</small></label>
             </div>
           </div>          
           <div>
-            <input id="chkNumeric" class="checkbox validCheckBox" onchange="validate()" type="checkbox">
+            <input id="chkNumeric" class="checkbox validCheckBox" type="checkbox">
             <label>Numeric Characters <small>(1, 2, etc.)</small></label>
           </div>
           <div>
-            <input id="chkLower" class="checkbox validCheckBox" onchange="validate()" type="checkbox">
+            <input id="chkLower" class="checkbox validCheckBox" type="checkbox">
             <label>Lowercase Characters</label>
           </div>
           <div>
-            <input id="chkUpper" class="checkbox validCheckBox" onchange="validate()" type="checkbox">
+            <input id="chkUpper" class="checkbox validCheckBox" type="checkbox">
             <label>Uppercase Characters</label>
           </div>
         </form>
@@ -56,8 +56,8 @@
         <hr>
         <!--buttons-->
         <div class="btnGroup">
-          <button id="generate" onclick="generate()" disabled class="btn bgRed disabled">Generate Password</button>
-          <button id="copy" onclick="copyClip()" disabled class="btn disabled">Copy to Clipboard</button>
+          <button id="generate" disabled class="btn bgRed disabled">Generate Password</button>
+          <button id="copy" disabled class="btn disabled">Copy to Clipboard</button>
         </div> 
       </div>
     </div>

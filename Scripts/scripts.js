@@ -1,4 +1,4 @@
-
+//set some global elements
 var textArea = document.getElementById("password");
 var copyClipButton = document.getElementById("copy");
 var generateBtn = document.getElementById("generate");
@@ -9,10 +9,39 @@ var specilCharsExcluded = "!@#$%^&*_-+=?"; // excluded chacters: '{ } [ ] ( ) / 
 var lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
 var upperCaseChars = lowerCaseChars.toUpperCase();
 var numericChars = "0123456789";
+var minLength = 8;
+var maxLength = 128;
+var defaultLength = 16;
 
-//fill in the default amount of slider on page load
+//onload: initalize values and events
 onload = function(){
+    
+    //grab the elements we need
+    var slider = document.getElementById("lengthSliderInput");
+    var sliderText = document.getElementById("rangeValue");
+    var checkBoxes = document.querySelectorAll(".validCheckBox");
+     
+    //set default values for the slider
+    slider.max = maxLength;
+    slider.min = minLength;
+    slider.value = defaultLength;
+    sliderText.value = defaultLength;
+
+    //set all the events
+    generateBtn.onclick = generate;
+    copyClipButton.onclick = copyClip;
+    slider.onchange = function(){updateRangeValue(slider)};
+    sliderText.onblur = function(){updateRangeValue(slider)};
+    sliderText.oninput = function(){updateSliderValue(sliderText)};
+    
+    //set all checkbox events
+    for (var i = 0; i < checkBoxes.length;i++){        
+        checkBoxes[i].onchange = validate;       
+    }
+
+    //fill in the default amount of slider on page load
     updateSliderBackground(document.getElementById("lengthSliderInput"));
+  
  };
 
 //on button click
@@ -38,11 +67,7 @@ function copyClip(){
     alert("Password Copied to Clipboard");
     clearSelection();
 }
-//toggles the hidden field for excluding ambiguous characters
-function toggleAmbigCharChk(){
-    var chkExcludeAmbigChar = document.getElementById("excludeAmbigChar");
-    chkExcludeAmbigChar.toggleAttribute("hidden");
-}
+
 //generate the password based on criteria
 function createPassword(){
     //set up our variables
@@ -50,7 +75,8 @@ function createPassword(){
     var totalCharSet = "";
     var passwordResult = "";
     var randomPos = 0;
-    //grab our elements
+
+    //grab our input values
     var inputLength = parseInt(document.getElementById("lengthSliderInput").value);
     var isSpecialChk = document.getElementById("chkSpecial").checked;
     var isExcludeAmbigChk = document.getElementById("chkExcludeAmbigChar").checked;
@@ -58,7 +84,6 @@ function createPassword(){
     var isLowerChk = document.getElementById("chkLower").checked;
     var isUpperChk = document.getElementById("chkUpper").checked;
     
-
     //ensure at least one character of each type of checked character is included.
     if (isSpecialChk){
         //change character set if ambiguous characters are to be excluded
@@ -118,17 +143,21 @@ function getRandomZeroToMax(maxValue){
 
 }
 
+//check to see if at least one main checkbox is selected
 function validate(){
     var isValid = false;
     var validAlert = document.getElementById("validateAlert");
     var inputs = document.querySelectorAll(".validCheckBox");
-    
+   
+    if( this.id === "chkSpecial"){
+         toggleAmbigCharChk();
+    }
     //check if inputs are checked.
     for(var i = 0 ; i < inputs.length; i++){
-        
         if (inputs[i].checked){
             isValid = true;
         }
+        
     }
    
     // update the ui
@@ -223,4 +252,9 @@ function validateSliderTextInput(value, sliderElem, textElem){
         return true;
     }
     
+}
+//toggles the hidden field for excluding ambiguous characters
+function toggleAmbigCharChk(){
+    var chkExcludeAmbigChar = document.getElementById("excludeAmbigChar");
+    chkExcludeAmbigChar.toggleAttribute("hidden");
 }
