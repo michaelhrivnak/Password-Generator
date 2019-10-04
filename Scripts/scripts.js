@@ -42,7 +42,7 @@ onload = function(){
     //fill in the default amount of slider on page load
     updateSliderBackground(document.getElementById("lengthSliderInput"));
   
- };
+ }; 
 
 //on button click
 function generate(){
@@ -148,7 +148,7 @@ function validate(){
     var isValid = false;
     var validAlert = document.getElementById("validateAlert");
     var inputs = document.querySelectorAll(".validCheckBox");
-   
+    console.log(this);
     if( this.id === "chkSpecial"){
          toggleAmbigCharChk();
     }
@@ -156,16 +156,18 @@ function validate(){
     for(var i = 0 ; i < inputs.length; i++){
         if (inputs[i].checked){
             isValid = true;
-        }
-        
+        }        
     }
    
     // update the ui
     if(isValid){
+
         validAlert.style.visibility = "hidden";
         generateBtn.disabled = false;
         generateBtn.classList.remove("disabled");
+
     }else{       
+
         validAlert.style.visibility = "visible";
         generateBtn.disabled = true;
         generateBtn.classList.add("disabled"); 
@@ -220,7 +222,7 @@ function updateSliderBackground(elem){
 function updateSliderValue(elem){
 
     var rangeSlider = document.getElementById("lengthSliderInput");    
-    
+    console.log(parseInt(elem.value).toString());
     if(validateSliderTextInput(parseInt(elem.value), rangeSlider, elem)){
         rangeSlider.value = elem.value.toString();
         updateSliderBackground(rangeSlider);
@@ -230,7 +232,7 @@ function updateSliderValue(elem){
 
 //control our inputs
 function validateSliderTextInput(value, sliderElem, textElem){
-    
+   
     if(isNaN(value)){
              
         return false;
