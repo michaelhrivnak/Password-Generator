@@ -2,6 +2,8 @@
 var textArea = document.getElementById("password");
 var copyClipButton = document.getElementById("copy");
 var generateBtn = document.getElementById("generate");
+var slider = document.getElementById("lengthSliderInput");
+var sliderTxt = document.getElementById("rangeValue");
 
 //set our allowed characters
 var specialChars = "`~!@#$%^&*_-+={}[]():;<>,.?/'";
@@ -17,22 +19,20 @@ var defaultLength = 16;
 onload = function(){
     
     //grab the elements we need
-    var slider = document.getElementById("lengthSliderInput");
-    var sliderText = document.getElementById("rangeValue");
     var checkBoxes = document.querySelectorAll(".validCheckBox");
      
     //set default values for the slider
     slider.max = maxLength;
     slider.min = minLength;
     slider.value = defaultLength;
-    sliderText.value = defaultLength;
+    sliderTxt.value = defaultLength;
 
     //set all the events
     generateBtn.onclick = generate;
     copyClipButton.onclick = copyClip;
-    slider.onchange = function(){updateRangeValue(slider)};
-    sliderText.onblur = function(){updateRangeValue(slider)};
-    sliderText.oninput = function(){updateSliderValue(sliderText)};
+    slider.onchange = function(){updateSliderTxtValue()};
+    sliderTxt.onblur = function(){updateSliderTxtValue()};
+    sliderTxt.oninput = function(){updateSliderValue()};
     
     //set all checkbox events
     for (var i = 0; i < checkBoxes.length;i++){        
@@ -40,7 +40,7 @@ onload = function(){
     }
 
     //fill in the default amount of slider on page load
-    updateSliderBackground(document.getElementById("lengthSliderInput"));
+    updateSliderBackground();
   
  }; 
 
@@ -77,7 +77,7 @@ function createPassword(){
     var randomPos = 0;
 
     //grab our input values
-    var inputLength = parseInt(document.getElementById("lengthSliderInput").value);
+    var inputLength = parseInt(slider.value);
     var isSpecialChk = document.getElementById("chkSpecial").checked;
     var isExcludeAmbigChk = document.getElementById("chkExcludeAmbigChar").checked;
     var isNumChk = document.getElementById("chkNumeric").checked;
@@ -148,7 +148,7 @@ function validate(){
     var isValid = false;
     var validAlert = document.getElementById("validateAlert");
     var inputs = document.querySelectorAll(".validCheckBox");
-    console.log(this);
+   
     if( this.id === "chkSpecial"){
          toggleAmbigCharChk();
     }
@@ -197,60 +197,57 @@ function clearSelection() {
     }
 }
 //updates the range number indicator
-function updateRangeValue(elem){
-
-    var rangeText = document.getElementById("rangeValue");
-    
-    rangeText.value = elem.value.toString();
+function updateSliderTxtValue(){
+        
+    sliderTxt.value = slider.value;
     //adjust the slider background based on value
-    updateSliderBackground(elem);
+    updateSliderBackground();
 }
 
 //updates the slider bar progress
-function updateSliderBackground(elem){
+function updateSliderBackground(){
     
-    var min = parseInt(elem.getAttribute("min"));
-    var max = parseInt(elem.getAttribute("max"));
-    var val = parseInt(elem.value);
+    var min = parseInt(slider.getAttribute("min"));
+    var max = parseInt(slider.getAttribute("max"));
+    var val = parseInt(slider.value);
 
-    elem.style.backgroundImage = 'linear-gradient(to right, #395d7C ' 
+    slider.style.backgroundImage = 'linear-gradient(to right, #395d7C ' 
     + Math.round((val-min)/(max-min)*100) 
     + '%, #d3d3d3 ' + Math.round((val-min)/(max-min)*100) + '% )'; 
 }
 
 //control our inputs
-function updateSliderValue(elem){
-
-    var rangeSlider = document.getElementById("lengthSliderInput");    
-    console.log(parseInt(elem.value).toString());
-    if(validateSliderTextInput(parseInt(elem.value), rangeSlider, elem)){
-        rangeSlider.value = elem.value.toString();
-        updateSliderBackground(rangeSlider);
+function updateSliderValue(){
+          
+    if(validateSliderTextInput()){
+        slider.value = parseInt(sliderTxt.value);
+        updateSliderBackground();
     }
     
 }
 
 //control our inputs
-function validateSliderTextInput(value, sliderElem, textElem){
-   
+function validateSliderTextInput(){
+   var value = sliderTxt.value;
+
     if(isNaN(value)){
              
         return false;
 
-    }else if(value < parseInt(sliderElem.getAttribute("min"))){
+    }else if(value < parseInt(slider.getAttribute("min"))){
         
-        sliderElem.value = sliderElem.getAttribute("min");
-        updateSliderBackground(sliderElem);
+        slider.value = slider.getAttribute("min");
+        updateSliderBackground();
         return false;
   
-    }else if (value > parseInt(sliderElem.getAttribute("max"))){
+    }else if (value > parseInt(slider.getAttribute("max"))){
         
-        sliderElem.value = sliderElem.getAttribute("max");
-        updateSliderBackground(sliderElem);
+        slider.value = slider.getAttribute("max");
+        updateSliderBackground();
         return false;
   
     }else{
-        
+       
         return true;
     }
     
